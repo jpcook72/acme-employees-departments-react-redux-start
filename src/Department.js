@@ -1,7 +1,8 @@
 import React from 'react';
 import Employees from './Employees';
+import {connect} from 'react-redux'
 
-const Department = ({ department, employees, destroyEmployee, removeFromDepartment })=> {
+const Department = ({ department, employees })=> {
     return (
       <li>
         <span className='department-title'>
@@ -12,11 +13,17 @@ const Department = ({ department, employees, destroyEmployee, removeFromDepartme
         <Employees
           department={ department }
           employees ={ employees }
-          destroyEmployee = { destroyEmployee }
-          removeFromDepartment={ removeFromDepartment }
         />
       </li>
     );
 };
 
-export default Department;
+
+const mapState = (state) => {
+  return {
+    employees: state.employees,
+    departments: state.departments
+  }
+}
+
+export default connect(mapState, null)(Department)
